@@ -1,0 +1,181 @@
+
+<header>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400|Anton|Yanone+Kaffeesatz:300,400" rel="stylesheet">
+	<style>
+	*{webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; font-family: 'Roboto', sans-serif;}
+	body{margin:0; color:#333; font-family: 'Roboto', sans-serif; font-size:0.9em; font-weight:300; line-height:1.3em;background-color:grey}
+	.cvpage{max-width:900px;margin:auto;background-color:white}
+	.cvhead{background:#424242; color:white; text-align:center; padding: 20px; margin-bottom: 25px}
+	.cvside{width:20%; text-align:right}
+	.cvmain{width:79%;padding-left:30px; padding-right:20px}
+	.cvhead h1,.cvtitle{font-family: 'Roboto', sans-serif; }
+	.firstname{font-weight:100}
+	.lastname{font-weight:400}
+	.cvhead h1{font-size: 3em}
+	.cvhead{padding:20px}
+	.cvside h3{font-family: 'Roboto', sans-serif; font-weight:bold; margin: 15px 0 0 0}
+	.cvjob{display:table; width:100%; margin-bottom:10px}
+	.cvwhere{float:right; font-size:0.9em}
+	.cvperiod{width:100px; display:table-cell}
+	.cvside,.cvmain{display:inline-block; vertical-align:top}
+	.cvorg{ font-family: 'Roboto', sans-serif;font-weight: bold; font-size:0.9em;}
+	.cvjobtitle{font-style: italic}
+	</style>
+	<!-- VueJS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.16/vue.js"></script>
+</header>
+<body>
+<div class="cvpage">
+	<div class="cvhead">
+		<h1><span class='firstname'>{{firstname|lowercase}}</span><span class='lastname'>{{lastname|lowercase}}</span></h1>
+		<span class="cvtitle">{{title}}</span>
+	</div>
+	<div class="cvside">
+		<h3>contact</h3>
+		<div>{{{address}}}</div><p>{{{phone}}}</p><p>{{{email}}}</p><p>{{{link}}}</p>
+		<h3>languages</h3>
+		<div>{{{languages}}}</div>
+		<h3>programming</h3>
+		<div>{{{programming}}}</div>
+	</div>
+	<div class="cvmain">
+		<p>{{about}}</p>
+		<br>
+		<h2><span style="color:steelblue">exp</span>erience</h2>
+		<div v-for="job in experience" class="cvjob">
+			<div class="cvperiod">{{job.period}}</div>
+			<div class="">
+				<span class="cvorg">{{job.org|uppercase}}</span>
+				<span class="cvwhere">{{job.where}}</span>
+				<div class="cvjobtitle">{{job.title}}</div>
+				<div class="cvjobdesc">{{job.description}}</div>
+			</div>
+		</div>
+		<br>
+		<h2><span style="color:lightgreen">por</span>tfolio</h2>
+		<div v-for="work in portfolio" class="cvjob">
+			<div class="">
+				<div class="cvorg">{{work.title}} (<a v-bind:href="work.url">{{work.url}}</a>)</div>
+				<div class="cvjobtitle">{{work.description}}</div>
+			</div>
+		</div>
+		<br>
+		<h2><span style="color:orange">edu</span>cation</h2>
+		<div v-for="job in education" class="cvjob">
+			<div class="cvperiod">{{job.period}}</div>
+			<div class="">
+				<span class="cvorg">{{job.org|uppercase}}</span>
+				<span class="cvwhere">{{job.where}}</span>
+				<div class="cvjobtitle">{{job.title}}</div>
+				<div class="cvjobdesc">{{job.description}}</div>
+			</div>
+		</div>
+		<br>
+		<h2><span style="color:pink">int</span>erests</h2>
+		<strong>professional: </strong>sotware design, 
+		<strong>personal: </strong>movies, cooking
+		<br><br><br>	
+	</div>
+</div>
+</body>
+
+<script>
+var app = new Vue({
+	el: 'body',
+	data: {
+		//title:'title',
+		firstname: 'Vasilis',
+		lastname: 'Zoumpourlis',
+		title: 'LAMP Fullstack Developer',
+		address: "Av. Michoacán 64<br>Col. Guadalupe del Moral<br>CP. 09300, Mexico City",
+		phone: '044 55 6164 6076',
+		email: 'v.zuburlis@gmail.com',
+		'link': 'gilacms.com',
+		languages: 'greek mother tongue<br>spanish & english fluency',
+		programming: 'PHP, C++, MySQL<br>VueJs, JQuery<br>Python, Unity3D',
+		about: 'Web developer with 6 years of professional experience. Object oriented coder with focus on efficiency and reusability. Can work independently using my own initiative or as part of a team. Open source enthusiast, continuously learning new technologies.',
+		education: [
+			{
+				period:'2008-2011',
+				org:'University of Patra',
+				title:'Materials Engineering',
+				description:'',
+				where:'Greece'
+			},
+			{
+				period:'2001-2003',
+				org:'Technology School of Thessaloniki',
+				title:'Informatics Technology',
+				description:'',
+				where:'Greece'
+			},
+			{
+				period:'2000-2001',
+				org:'University of Thessalia',
+				title:'Economics',
+				description:'',
+				where:'Greece'
+			}
+		],
+		portfolio: [
+			{
+				url:'www.taniarguijo.com.mx',
+				title:'Tania Arguijo',
+				description:'Political Blog'
+			},
+			{
+				url:'www.spacecronos.com/star-systems',
+				title:'Star systems WebGL',
+				description:'3D simulator of exoplanetary systems'
+			},
+			{
+				url:'www.anunciosdorados.com',
+				title:'Anuncios Dorados',
+				description:'Clasifieds website'
+			}
+		],
+		experience: [
+			{
+				period:'2016 - today',
+				org:'Optimal Value',
+				title:'Web Developer',
+				description:'Developed System architecture and development of PaaS (Platfrom aa a service). Data visualization of KPIs and Advanced Schedule Planning',
+				where:'Mexico City'
+			},
+			{
+				period:'2016',
+				org:'EON Reality Mexico',
+				title:'Game Programer',
+				description:'Developed of applications of virtual reality and 3D video games.',
+				where:'Mexico City'
+			},
+			{
+				period:'2015 - 2016',
+				org:'EVM Energía',
+				title:'Web Developer',
+				description:'Designed and developed applications like Business Intelligence, supervision and accident reporting',
+				where:'Mexico City'
+			},
+			{
+				period:'2011 - 2015',
+				org:'Freelance',
+				title:'Web developer',
+				description:'Developed of websites including design, coding, tests and documentation. Account administrating of Google Adwords, Adsense y Analytics.',
+				where:'Greece'
+			},
+			{
+				period:'2012',
+				org:'ICNAAM',
+				title:'Technical Support',
+				description:'Technical assistance in configuration of the hardware in the conference rooms and support for the participants of the conference.',
+				where:'Kos, Greece'
+			}
+
+		],
+		
+	},
+	components: {
+		//'milestones': tmp,
+	}
+});
+</script>
